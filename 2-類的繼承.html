@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+
+
+
+
+
+
+
+    <script>
+        // 1. 類的繼承 extends
+        // 2. super 關鍵字 可以調用父類中的構造函數
+        class Father {
+            constructor(x,y) {
+                this.x = x;
+                this.y = y;
+            }
+            sum() {
+                console.log(this.x + this.y);
+            }
+        }
+
+        class Son extends Father {
+            constructor(x,y){
+                super(x,y); // 調用了父類中的構造函數
+            }
+        }
+
+        let son = new Son(10,123)
+        let son5 = new Son(101,12);
+
+        son.sum();
+        son5.sum();
+
+        // super 關鍵字 調用父類普通函數 (前面調用的是構造函數)
+        // 繼承中的屬性或者方法查找原則 : 就近原則
+        // 1. 繼承中，如果實例化子類書出一個方法，先看子類有沒有這個方法，如果有就使用子類的方法。
+        // 2. 繼承中，如果子類裡面沒有，就去查找父類有沒有這個方法，如果有，就執行父類的 ( 就近原則 )。
+        class Father2 {
+            say() {
+                return "我是爸爸";
+            }
+        }
+
+        class Son2 extends Father2 {
+            say() {
+                // console.log("我是兒子");
+                console.log(super.say()+"的兒子");
+                // super.say() 就是調用父類中的普通函數say();
+                // 前面調用的是構造函數
+            }
+        }
+
+        let son2 = new Son2();
+        son2.say();
+
+        let father2 = new Father2();
+        console.log(father2.say()); 
+    </script>
+</body>
+</html>

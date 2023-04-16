@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>改變this指向</title>
+</head>
+
+<body>
+
+    <button>我是郡安1</button>
+    <button>我是郡安2</button>
+    <button>我是郡安3</button>
+    <button>我是郡安4</button>
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+        // 改變函數內指向，JavaScript 提供三種作法 
+        // call() apply() bind()
+
+        // 1. call ("物件",參數1,參數2,...)
+        
+        // 可以用物件改變指向
+        function Father(name, age) {
+            this.m_name = name;
+            this.m_age = age;
+        }
+
+        function Son(son_name, son_age, score) {
+            Father.call(this, son_name, son_age);
+            this.son_score = score;
+        }
+
+        Son.prototype.exam = function () {
+            console.log(this.m_name + "考了" + this.son_score + "分");
+        }
+
+        let son1 = new Son("劉德華", 18, 90);
+        console.log(son1);
+        son1.exam();
+
+        // 2. apply () 調用函數的方法，但是可以改變this指向
+
+        // apply(thisArg , [argsArray])
+        // thisArg : 在函數運行時指定的this值
+        // argsArray : 傳遞的值，必須包含在數組裡面
+        // 返回值就是函數的返回值，因為他就是調用函數
+        let o = {
+            name: "APPLE"
+        };
+
+        function fn(arr) {
+            console.log(this);
+            console.log(arr); // 字符串
+        }
+
+        fn.apply(o, ["pink", 11, 12]);
+        // (1) 調用函數 this可以改變函數內部的this指向
+        // (2) 但是他的參數必須是數組 (偽數組) 
+        // (3) apply的主要應用，比如說我們可以利用 apply 藉助於數學內置對象求最大值
+        // Math.max()
+        let arr = [11, 4, 777, 545, 43, 27];
+        console.log(Math.max([1, 4, 777, 545, 43, 2]));
+        console.log(Math.max(1, 4, 777, 545, 43, 2));
+        let max = Math.max.apply(Math, arr);
+        let min = Math.min.apply(Math, arr);
+
+        console.log(max);
+        console.log(min);
+
+        // 3. bind(thisArg , arg1 , arg2 , ...) 
+        // 也可以改變this內部指向，只是不會調用函數
+        // thisArg : 在函數運行時指定的this值
+        // arg1 ,arg2 : 傳遞其他參數
+        // 返回由指定的this值 和 初始化參數改造的原函數拷貝 (產生新函數)
+
+        let ggg = {
+            name: "俊安"
+        }
+
+        function getAn(a,b) {
+            console.log("我是" + this.name);
+            console.log(a+b);
+        }
+
+        let getggg = getAn.bind(ggg,1,2); // 可以加參數
+        getggg(ggg);
+        // 1. 不會調用原來的函數 可以改變原來函數內部的this指向
+        // 2. 返回的是原函數改變this後產生的新函數
+        // 3. 如果有的函數我們不需要立即調用，但是又想改變這個函數內部的this指向
+        // 4. 我們有個按鈕，當我們點擊之後，就禁用按鈕，3秒後開啟這個按鈕
+
+        // let btn = document.querySelector("button");
+        // btn.addEventListener("click", function(){
+        //     this.disabled = true;
+        //     console.log("false");
+        //     setTimeout(function(){
+        //         this.disabled = false;
+        //     }.bind(this),3000) // 這個this指向的是btn這個對象
+        // })
+        let btns = document.querySelectorAll("button");
+
+        btns.forEach((btn) => {
+            btn.addEventListener("click", function () {
+                this.disabled = true;
+                setTimeout(function(){
+                    btn.disabled = false
+                }.bind(this),3000)
+            })
+        });
+
+        // 箭頭函數有另外寫法 不用設置this 但要搞清楚是怎麼寫
+    </script>
+</body>
+
+</html>

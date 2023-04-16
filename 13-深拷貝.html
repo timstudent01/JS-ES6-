@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>深拷貝</title>
+</head>
+
+<body>
+
+
+
+
+
+
+
+
+
+    <script>
+
+        // 深拷貝拷貝多層，每一級別的數據都會拷貝，且不會干擾原來數據
+        let obj = {
+            id: 1,
+            name: "andy",
+            msg: {
+                age: 22
+
+            },
+            color: ["red", "blue"]
+        };
+
+        let o = {};
+
+        // 封裝函數
+        function deepcopy(newobj, oldobj) {
+            for (k in oldobj) {
+                // 判斷我們的屬性值屬於哪種數據類型
+                // 1. 獲取屬性值 oldobj[k]
+                let item = oldobj[k];
+                // 2. 判斷是否為數組 要先判斷數組 因為數組也是對象
+                if (item instanceof Array) {
+                    newobj[k] = [];
+                    deepcopy(newobj[k], item)
+                } else if (item instanceof Object) {
+                    // 3. 判斷是否為對象
+                    newobj[k] = {};
+                    deepcopy(newobj[k], item)
+                }
+                // 4. 屬於簡單數據類型
+                else {
+                    newobj[k] = item;
+                }
+            }
+        }
+        deepcopy(o, obj);
+        console.log(o);
+
+        let arr = [];
+        console.log(arr instanceof Object);
+        o.msg.age = 15;
+        console.log(obj);
+        console.log(o);
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

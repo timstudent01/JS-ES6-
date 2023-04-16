@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>類的本質</title>
+</head>
+
+<body>
+
+
+    <script>
+        // ES6 之前通過 構造函數+ 原型實現物件導向編程
+        // (1) 構造函數有原型對象prototype
+        // (2) 構造函數原型對象protortype 裡面有 constructor 指向構造函數本身
+        // (3) 構造函數可以通過原型對象添加方法
+        // (4) 構造函數創建的對象有__proto__ 原型 指向 構造函數的原型對象
+
+
+        // ES6 通過 類 實現物件導向編程
+        class Star {
+
+        }
+        console.log(typeof Star);
+
+        // 1. 類的本質其實還是一種函數，也可以簡單認為 類就是 構造函數的另一種寫法
+        // (1) 類有原型對象prototype
+        console.log(Star.prototype);
+        // (2) 類的原型對象protortype 裡面有 constructor 指向類本身
+        console.log(Star.prototype.constructor);
+        // (3) 類可以通過原型對象添加方法
+        Star.prototype.sing = function () {
+            console.log("唱歌");
+        }
+        let ldh = new Star();
+        console.dir(ldh);
+        // (4) 類創建的對象有__proto__ 原型 指向 類的原型對象
+        console.log(ldh.__proto__ === Star.prototype);
+
+
+
+        // arr.map
+        console.log("=======================");
+        const arr1 = [1, 2, 3]
+        let arr5=arr1.map(num => {
+            return num + 1
+        })
+        console.log(arr5) // [1,2,3]
+
+        const newArr = [1, 2, 3].map(num => {
+            return num + 1
+        })
+        console.log(newArr) // [2,3,4]
+
+        const arr2 = [{ value: 1 }, { value: 2 }, { value: 3 }]
+        arr2.map(obj => {
+            obj.value += 1
+            return obj
+        })
+        console.log(arr2) // [{value:2},{value:3},{value:4}]F
+    </script>
+</body>
+
+</html>

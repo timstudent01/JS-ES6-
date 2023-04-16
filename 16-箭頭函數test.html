@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test</title>
+</head>
+
+<body>
+
+
+
+
+
+
+
+
+
+
+    <script>
+        function fn() {
+            console.log(this);
+            return () =>{
+                console.log(this);
+
+            }
+        }
+
+        const obj = {name:"張三"};
+        const obj2 = {name :"李四"}
+
+        const resFn = fn.call(obj); // {name:"張三"};
+        resFn(); // 如果沒有 return箭頭函數 則會報錯 is not a function 
+        // resFn裡面裝啥都沒用
+        resFn.call = fn.call(obj2); // {name :"李四"}
+
+    </script>
+</body>
+
+</html>

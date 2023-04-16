@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ES6</title>
+</head>
+
+<body>
+
+
+
+    <script>
+        const ary = [1, 2, 3];
+        const [a, b, c] = ary;
+
+        console.log(a);
+        console.log(b);
+        console.log(c);
+
+        console.log("=================================");
+
+        const person = { name: "Zhongli", age: 6000 };
+        const { name, age } = person;
+
+        // 不想撞名可以這樣寫  const {name:$name , _age:} = person;
+
+
+        console.log(name);
+        console.log(age);
+
+        const o = {};
+
+        Object.assign(o, person);
+        console.log(o);
+
+        o.name = "Ganyu";
+        console.log(o);
+        console.log(person);
+
+        const character = {
+            character_name: "班尼特",
+            character_nick_name: {
+                value: "班"
+            }
+        }
+
+        const { character_name, character_nick_name } = character;
+
+        console.log(character_name);
+        console.log(character_nick_name);
+        console.log("=====================");
+        console.log(character_nick_name.value);
+        const o2 = {};
+
+        Object.assign(o2, character);
+
+        o2.character_nick_name.value = "溫迪"
+        o2.character_name = "溫迪2"
+
+
+        console.log("o2:"+o2.character_nick_name.value);
+        console.log("o2 character_name:"+o2.character_name);
+
+        // character_nick_name.value = o2.character_nick_name.value = character.character_nick_name.value
+
+        console.log(character_nick_name.value);
+        console.log(o2.character_nick_name.value);
+        console.log(character.character_nick_name.value);
+
+        o2.character_nick_name.value = "鍾離"
+
+        console.log(character_nick_name.value);
+        console.log(o2.character_nick_name.value);
+        console.log(character.character_nick_name.value);
+
+        console.log(character_nick_name.value===o2.character_nick_name.value);
+        console.log(o2.character_nick_name.value===character.character_nick_name.value);
+        console.log(character_nick_name.value===character.character_nick_name.value);
+        
+        console.log(character_nick_name.value===o2.character_nick_name.value===character.character_nick_name.value);
+
+
+        let gg = 3;
+        let ff = gg ;
+        let hh = ff ;
+        console.log(gg===ff);
+        console.log(gg===hh);
+        console.log(ff===hh);
+        console.log(gg===ff===hh);
+    </script>
+
+</body>
+
+</html>

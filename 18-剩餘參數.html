@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>剩餘參數</title>
+</head>
+<body>
+    
+
+
+
+
+
+
+
+    <script>
+        const sum = (...args)=>{
+            let total = 0;
+            args.forEach(value=>{
+                total += value;
+            })
+            return total;
+        }
+        
+
+        console.log("sum : "+sum(10,12)); 
+        const sum_2 = sum(10,11,12);
+        console.log("sum_2 : "+sum_2);
+
+        const sum2 = (...args) => {
+            let total = 0;
+            args.forEach( item => total+=item );
+            return total;
+        }
+        console.log("sum2 : "+sum2(10,11,13));
+
+        const sum3 = (a,...args) => {
+            let total = 0;
+            args.forEach(c => {total+=c});
+            return a+total;
+        }
+        console.log("sum3 : "+sum3(10,11,12,13));
+        // 配合解構使用
+        const students = ["張三","李四","王五"];
+        const [s1,...s2] = students;
+
+        console.log(s1); // 張三
+        console.log(s2); // ["李四","王五"]
+
+
+
+
+
+    </script>
+</body>
+</html>

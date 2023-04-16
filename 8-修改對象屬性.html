@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>修改對象屬性</title>
+</head>
+<body>
+    
+
+
+
+
+
+
+    <script>
+        class product {
+            constructor(id,name,price){
+                this.id  = id;
+                this.name = name;
+                this.price = price
+            }
+        }
+
+        let cellphone = new product(1,"小米手機5",19999);
+        console.log(cellphone);
+
+
+        // Object.defineProperty() 定義新屬性或是修改原有屬性(沒有該屬性就會新增)
+        // 語法 : Object.defineProperty(物件,屬性,descriptor)
+        // descriptor 以 {} 書寫 而其中又區分幾個值
+        // 1. value : 設置屬性的值，默認為undefinde;
+        // 2. writable : 值是否可以重寫。 true|false 默認為false 
+        // 3. enumerable : 目標屬性是否可以被枚舉。 true|false 默認為false 
+        // 4. configurable : 目標屬性是否可以被刪除或是否可以再次修改特性 true|false 默認為false 
+
+        Object.defineProperty(cellphone,"id",{
+            value:101
+        })
+        console.log(cellphone);
+
+        console.log("--------------------------1-------------------------------");
+
+        // 1. writable 是否能被修改 默認是false 但是一開始建立物件的時候給了屬性 就直接變成true了
+        Object.defineProperty(cellphone,"id",{
+            writable : false // 不能被修改
+        })
+
+        cellphone.id = 10;
+        console.log(cellphone);
+
+        Object.defineProperty(cellphone,"id",{
+            writable : true // 可以被修改
+        })
+        cellphone.id = 10;
+        console.log(cellphone);
+
+        Object.defineProperty(cellphone,"price",{
+            value:999
+        })
+
+        console.log(cellphone);
+
+        console.log("--------------------------2-------------------------------");
+
+        // 2. Object.keys() 獲取屬性名 沒有值
+        let a = Object.keys(cellphone);
+
+        function getProperty (aaa) {
+            aaa.forEach(value => {
+                console.log(value);
+            });
+        }
+
+        getProperty(a);
+
+        console.log("--------------------------3-------------------------------");
+
+        // 3. enumerable 設置為false 可以讓遍歷抓不到屬性 
+        Object.defineProperty(cellphone,"evulation",{value:"good"}); // 新建立的屬性 上述有默認為false都是false
+
+        Object.defineProperty(cellphone,"size",{value:"5.7inch" , enumerable :false});
+        console.log(cellphone);
+        console.log(a); // 此時新建立的evulation 和 size 都不會被遍歷出來，enumrable 默認是 false 所以cellphone也無法被遍歷出來
+        // 注意 : 一開始給物件屬性的時候，會讓默認都變成true
+
+        console.log("--------------------------4-------------------------------");
+        // 4. configurable 設置為true時，會無法被刪除或修改
+        Object.defineProperty(cellphone,"aaa",{value:"aaa" , writable:true,configurable:true});
+        delete cellphone.aaa;
+        console.log(cellphone);
+        Object.defineProperty(cellphone,"vvv",{value:"vvv" , writable:true,configurable:false});
+        delete cellphone.vvv;
+        console.log(cellphone);
+    </script>
+</body>
+</html>

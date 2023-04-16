@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>箭頭函數重點</title>
+</head>
+<body>
+    
+
+
+
+
+    <script>
+        let age = 100; // 用let宣告 以下全部都是 undefined 
+        //  var age = 100; 則以下的 this.age 都會因為宣告全域變數，而變成100
+        var var_age = 1000; // 1000
+        
+        let obj = {
+            age : 19,
+            say : () => {
+                console.log("say : "+this.age); // say : undefined
+                console.log("say : "+this.var_age); 
+
+            },
+            hi : function() {
+                console.log("hi : "+this.age); // hi : 19
+            },
+            say2 : () => {
+                console.log(this.age); // say2 : undefined
+            }
+        }
+
+        obj.say();
+        obj.hi();
+        obj.say2(); 
+
+
+    </script>
+</body>
+</html>

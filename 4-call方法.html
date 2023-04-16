@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>call</title>
+</head>
+
+<body>
+
+
+
+
+
+    <script>
+        function fn(x, y) {
+            console.log("我想喝手磨咖啡");
+            console.log(this); // 指向window
+            console.log(x + y);
+        }
+
+        let o = {
+            name: "andy"
+        };
+
+        // 1. call() 可以調用函數
+        fn.call();
+
+        // 2. call() 可以改變這個函數的this指向
+        fn.call(o, 1, 2); // 可以放物件 改變this指向
+
+
+
+        // 借用父構造函數 繼承屬性
+        // 1. 父構造函數 
+        function Father(name, age) {
+            this.m_name = name;
+            this.m_age = age;
+        }
+        // 2. 子構造函數
+        function Son(son_name, son_age, score) {
+            // this 指向子構造函數的對象實例
+            Father.call(this, son_name, son_age);
+            this.m_score = score;
+        }
+
+        // 父原型函數 若沒有 讓子原型繼承 就不會存在
+        Father.prototype.money = function () {
+            console.log("1000000000");
+        }
+        // 所以要讓子原型 = 父原型 
+        // 但是如果 直接子原型賦值成父原型
+        // 父原型 也會因為子原型指向回去 而得到子原型的屬性
+
+        Son.prototype.exam = function () {
+            console.log(this.m_name + "考試考了" + this.m_score);
+        }
+        
+        // 如果用創造實例對象的方法，繼承原型，則還是要指回原本的constructor
+        Son.prototype = new Father();
+        Son.prototype.constructor = Son;
+        let son1 = new Son("孩子1", 18, 90);
+
+        son1.exam();
+
+
+
+    </script>
+</body>
+
+</html>

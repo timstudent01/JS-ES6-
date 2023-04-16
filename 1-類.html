@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+
+</head>
+<body>
+    
+
+
+
+
+<script>
+    // 1. 創建類 class 創建一個明星類
+    class Star {
+        constructor(uname , age ,height ,weight) {
+            this.s_name = uname
+            this.s_age = age
+            this.s_height = height
+            this.s_weight = weight
+        }
+        sing(song_name) {
+            console.log(this.s_name+"唱了"+song_name);
+        }
+        attack(damage) {
+            console.log(this.s_name+"造成了"+damage+"點傷害")
+        }
+        cook_a_cake(cake_name){
+            console.log(this.s_name+"做了"+cake_name+"蛋糕");
+        }
+    }
+
+
+
+
+
+    // 2. 利用類創造物件 new 
+    let ldh = new Star('劉德華',20,"199公分","88公斤");
+    let csy = new Star("張學友",32,"200公分","77公斤");
+    let pipi = new Star ("皮皮奇",25,"168公分","65公斤");
+    console.log(ldh.s_name,csy.s_name);
+    console.log(ldh,csy);
+
+    ldh.sing("冰雨");
+    csy.sing("中國話");
+
+    ldh.attack(99);
+    // (1) 類裡面所有的函數不需要寫function
+    // (2) 多個函數方法之間不需要逗點隔開
+    console.log(pipi);
+
+    pipi.cook_a_cake("皮皮塔");
+</script>
+</body>
+</html>

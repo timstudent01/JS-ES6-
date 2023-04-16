@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fliter實例</title>
+
+
+    <style>
+        .search-box {
+            width: 100%;
+            background-color: pink;
+            margin: 0 auto;
+        }
+
+        .search-box-s {
+            width: 50%;
+            background-color: pink;
+            margin: 0 auto;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            background-color: aqua;
+            border-spacing: 0;
+
+        }
+
+        thead {
+            width: 100%;
+
+        }
+
+        tr {
+            width: 100%;
+        }
+
+        th,
+        td {
+            text-align: center;
+            background-color: #fff;
+            border: 1px solid black;
+            width: 33%;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+
+    <div class="search-box">
+        <div class="search-box-s">
+            <label for="">搜尋價格 : 由</label><input type="text" class="start"><label for="">到</label><input type="text"
+                class="end"><label for=""><button class="btn_price">價格搜尋</button>產品名稱 : </label><input type="text" class="name"><button class="btn_name">名字搜尋</button>
+            <br>
+            <table>
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>name</th>
+                        <th>price</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    <script>
+        // 獲取元素
+        const tbody = document.querySelector("tbody");
+        const btn_name = document.querySelector(".btn_name")
+        const btn = document.querySelector(".btn_price");
+        const start = document.querySelector(".start");
+        const end = document.querySelector(".end");
+        const name = document.querySelector(".name");
+        const arr = [{ id: "1", name: "邱品鈞", price: 999 }, { id: "2", name: "霧切", price: 1999}, { id: "3", name: "薙刀", price: 2999 },{ id: "4", name: "邱秋2", price: 2999 }];
+
+        // 刷新資料
+        function setdata(v) {
+            v.forEach((product) => {
+                let tr = document.createElement("tr");
+                tr.innerHTML = `<td>${product.id}</td><td>${product.name}</td><td>${product.price}</td>`
+                tbody.appendChild(tr);
+            });
+        }
+
+        // 先調用一次
+        setdata(arr);
+
+        // 價格篩選
+        btn.addEventListener("click", () => {
+            tbody.innerHTML = "";
+            let newarr = arr.filter((value) => {
+                return value.price >= start.value && value.price <= end.value;
+            })
+            console.log(newarr);
+            setdata(newarr);
+        })
+
+        // 名字篩選
+        btn_name.addEventListener("click", () => {
+            tbody.innerHTML = "";
+            let newarr = arr.filter((value) => {
+                return value.name.includes(name.value);
+            })
+            console.log(newarr);
+            setdata(newarr);
+        })
+
+
+    </script>
+
+
+</body>
+
+</html>

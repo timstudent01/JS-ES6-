@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array的擴展方法</title>
+</head>
+
+<body>
+
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+
+
+    <script>
+        // 擴展運算符 (展開語法)
+        // 將偽數組或可遍歷對象轉換為真正的數組
+
+        let oDivs = document.querySelectorAll("div");
+        console.log(oDivs);
+        let oDivs_array = [...oDivs];
+        console.log(oDivs_array);
+        oDivs_array.push("a");
+        console.log(oDivs_array);
+
+        // 構造函數方法 : Array.from()
+        // 將偽數組或可遍歷對象轉換為真正的數組
+
+        let arrayLike = {
+            "0":"張三",
+            "1":"李四",
+            "2":"王五",
+            "length":3
+        }
+
+        let ary = Array.from(arrayLike);
+        console.log(ary);
+
+        // 方法還可以接收第二個參數，作用類似於數組的map方法，用來對每個元素進行處理，將處理後的值放入返回的數組
+        
+        let arrayLike2 = {
+            "0":1,
+            "1":2,
+            "length":2
+        }
+
+
+        // =============================================================
+        //   let newArr = Array.from(arrayLike2,()=> {
+        //      return item*2;
+        //   });
+        // =============================================================
+        
+        //   可以寫成下面這樣
+        let newArr = Array.from(arrayLike2,item => item*2);
+        console.log(newArr);
+
+
+
+    </script>
+</body>
+
+</html>

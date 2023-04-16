@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>淺拷貝</title>
+</head>
+<body>
+    
+
+
+
+
+
+
+
+    <script>
+        // ==============================淺拷貝======================================================
+
+
+        // 淺拷貝只是拷貝一層，更深層次對象級別的只拷貝引用
+        // 深拷貝拷貝多層，每一級別的數據都會拷貝
+        let obj = {
+            id : 1,
+            name : "andy",
+            msg : {
+                age : 18,
+                name : "fff"
+            }
+        }
+
+
+        let o = {};
+
+        for (let k in obj) {
+            // k 是屬性名 obj[k]是屬性值
+            o[k] = obj[k];
+        }
+
+        console.log(o);
+
+        // 因為是把地址拷貝給o，是指向同一個地址，所以修改o的數據，會改動到obj的數據
+        o.msg.age = 15;
+        console.log(obj);
+
+        // ES6新增的淺拷貝 語法糖
+        // Object.assign(target,sources)
+
+        console.log("===================================");
+
+        let obj2 = {
+            id : 2,
+            name : "Sandy",
+            msg : {
+                age : 35,
+                name : "fff"
+            }
+        }
+
+
+        let o2 = {};
+
+        Object.assign(o2,obj2);
+        console.log(o2);
+
+        o2.msg.age = 19;
+
+        console.log(o2);
+
+        
+        // ==============================淺拷貝======================================================
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

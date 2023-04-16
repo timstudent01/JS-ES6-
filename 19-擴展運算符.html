@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>擴展運算符</title>
+</head>
+<body>
+ 
+    
+
+
+
+
+    <script>
+        // 擴展運算符 可以將數組拆分成以逗號隔開的參數序列
+        const ary = [1,2,3];
+        console.log(...ary); // 1 2 3 
+        console.log(1,2,3); // 1 2 3 這是因為逗號被當成分割符號
+        const ary2 = ["張三","李四"];
+        console.log(...ary2);
+
+        // 數組合併 
+        const ary3 = [...ary,...ary2];
+        console.log(ary3);
+
+        // 加入數組 push(...ary)
+        const ary4 = [0];
+        ary4.push(...ary3); // 此方法可以一次加入多種元素
+        console.log(ary4);
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fliter</title>
+</head>
+
+<body>
+
+
+
+
+
+    <script>
+        // 1. forEach (function(value,index,array)=> { })
+
+        // forEach((value,index,array)=>{})
+        const lis = [12, 54, 15, 99];
+        lis.forEach((li, i, lis) => {
+            lis[i] += 1;
+        });
+
+        console.log(lis);
+
+
+        // 2. array.fliter(function(currentValue, index ,arr))
+
+        // fliter() 方法會創建一個新的數組，新數組的元素通過檢查指定數組中符合條件的所有元素
+        // 會直接返回新數組
+        // currentValue : 數組當前項的值
+        // index : 數組當前項的索引
+        // arr : 數組對象本身
+        const lilis = [999, 799, 44, "我"];
+        const newlilis = lilis.filter((li, index) => {
+            return li > 99;
+        })
+        console.log(lilis.filter((li, index) => {
+            return li%2 ===0
+        }));
+
+        console.log(newlilis);
+
+        // 3. some 查找數組滿足條件的元素
+        // some(function(value,index,array))
+        const lililis = [999,444,1156,4484,"pink"];
+        let newlililis = lililis.some((li,index)=>{
+            return "pink";
+        })
+        console.log(newlililis);
+    </script>
+
+
+</body>
+
+</html>
